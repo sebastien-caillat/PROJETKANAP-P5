@@ -10,24 +10,24 @@ fetch("http://localhost:3000/api/products")
         console.log(products);
         for (let product in products) {
 
-            const productLink = document.createElement("a");
+            let productLink = document.createElement("a");
                 document.getElementById("items").appendChild(productLink);
-                productLink.setAttribute("href", "./product.html?id=products[product]._id");
+                productLink.href = `product.html?id=${products[product]._id}`;
 
-            const productCard = document.createElement("article");
+            let productCard = document.createElement("article");
                 productLink.appendChild(productCard);
 
-            const productImg = document.createElement("img");    
+            let productImg = document.createElement("img");    
                 productCard.appendChild(productImg);
                 productImg.src = products[product].imageUrl;
                 productImg.alt = products[product].altTxt;
 
-            const productTitle = document.createElement("h3");
+            let productTitle = document.createElement("h3");
                 productCard.appendChild(productTitle);
                 productTitle.classList.add("productName");
                 productTitle.textContent = products[product].name;
 
-            const productDescription = document.createElement("p");
+            let productDescription = document.createElement("p");
                 productCard.appendChild(productDescription);
                 productDescription.classList.add("productDescription");
                 productDescription.textContent = products[product].description;     
