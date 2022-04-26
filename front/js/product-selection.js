@@ -4,9 +4,7 @@ console.log(productId);
 
 let product = "";
 
-getProductChoice();
-
-function getProductChoice() {
+const getProductChoice = () => {
 
     fetch(`http://localhost:3000/api/products/${productId}`)
     .then(function(response) {
@@ -26,7 +24,9 @@ function getProductChoice() {
     .catch(err => console.log("Unable to fetch product id"));
 }
 
-function createProductChoice(product) {
+getProductChoice();
+
+const createProductChoice = (product) => {
 
     let productImg = document.createElement("img");
     document.querySelector(".item__img").appendChild(productImg);
@@ -41,5 +41,13 @@ function createProductChoice(product) {
 
     let productDescription = document.getElementById("description");
     productDescription.textContent = product.description;
+
+    for (let colors of product.colors) {
+        console.log(colors);
+        let productColors = document.createElement("option");
+        document.getElementById("colors").appendChild(productColors);
+        productColors.value = colors;
+        productColors.textContent = colors;
+    }
 
 }
