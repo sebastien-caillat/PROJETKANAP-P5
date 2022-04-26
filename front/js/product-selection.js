@@ -1,29 +1,35 @@
-let createUrl = new URL (document.location).searchParams;
-let productId = createUrl.get("id");
-let product = "";
- 
+let params = new URL (document.location).searchParams;
+let productId = params.get("id");
 console.log(productId);
 
-const getProductId = () => {
+let product = "";
+
+getProductChoice();
+
+function getProductChoice() {
+
     fetch(`http://localhost:3000/api/products/${productId}`)
     .then(function(response) {
         if (response.ok) {
             return response.json();
         }
     })
-    .then(function(result) {
-        product = result;
+
+    .then(async function(result) {
+        product = await result;
         console.log(product);
+        if (product) {
+            createProductChoice(product);
+        }
     })
-    .catch(err => console.log("Unable to fetch product id"))
+
+    .catch(err => console.log("Unable to fetch product id"));
 }
 
-getProductId();
-
-const getProductChoice = (product) => {
+function createProductChoice(product) {
 
     let productImg = document.createElement("img");
-    document.getElementsByClassName(item__img).appendChild(productImg);
+    document.querySelector(".item__img").appendChild(productImg);
     productImg.src = product.imageUrl;
     productImg.alt = product.altTxt;
 
@@ -35,4 +41,5 @@ const getProductChoice = (product) => {
 
     let productDescription = document.getElementById("description");
     productDescription.textContent = product.description;
+
 }

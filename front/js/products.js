@@ -8,8 +8,8 @@ fetch("http://localhost:3000/api/products")
     .then(function(getProducts) { 
         const products = getProducts;
         console.log(products);
-        for (let product in products) {
-
+        for (product in products) {
+ 
             let productLink = document.createElement("a");
                 document.getElementById("items").appendChild(productLink);
                 productLink.href = `product.html?id=${products[product]._id}`;
