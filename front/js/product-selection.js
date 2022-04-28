@@ -4,6 +4,9 @@ console.log(productId);
 
 let product = "";
 
+const colorChoice = document.getElementById("colors");
+const quantityChoice = document.getElementById("quantity");
+
 const getProductChoice = () => {
 
     fetch(`http://localhost:3000/api/products/${productId}`)
@@ -13,8 +16,8 @@ const getProductChoice = () => {
         }
     })
 
-    .then(async function(result) {
-        product = await result;
+    .then(function(result) {
+        product =  result;
         console.log(product);
         if (product) {
             createProductChoice(product);
@@ -51,3 +54,42 @@ const createProductChoice = (product) => {
     }
 
 }
+
+const addProductToCart = () => {
+
+    let addToCartButton = document.getElementById("addToCart");
+    console.log(addToCartButton);
+
+    addToCartButton.addEventListener("click", (event) => {
+
+        if(quantityChoice.value > 0 && quantityChoice.value <= 100) {
+
+            const quantity = quantityChoice.value;
+            const color = colorChoice.value;
+
+            const productChoice = {
+                productId: productId,
+                productQuantity: quantity,
+                productColor: color,
+            }
+
+            console.log(productChoice);
+
+            let savingProductToLocalStorage = JSON.parse(localStorage.getItem("product"));
+
+                if(savingProductToLocalStorage) {
+                    savingProductToLocalStorage.push(productChoice);
+                    localStorage.setItem("product", JSON.stringify(savingProductToLocalStorage));
+                } else {
+                    savingProductToLocalStorage = [];
+                    savingProductToLocalStorage.push(productChoice);
+                    localStorage.setItem("product", JSON.stringify(savingProductToLocalStorage));
+                }
+
+            console.log (savingProductToLocalStorage);
+        }
+    })
+
+}
+
+addProductToCart();
