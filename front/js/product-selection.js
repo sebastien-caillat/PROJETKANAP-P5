@@ -78,8 +78,17 @@ const addProductToCart = () => {
             let savingProductToLocalStorage = JSON.parse(localStorage.getItem("product"));
 
                 if(savingProductToLocalStorage) {
-                    savingProductToLocalStorage.push(productChoice);
-                    localStorage.setItem("product", JSON.stringify(savingProductToLocalStorage));
+                    const productAlreadyInLocalStorage = savingProductToLocalStorage.find(product => product.productId === productChoice.productId && product.productColor === productChoice.productColor);
+                    if(productAlreadyInLocalStorage) {        
+                        alert("Ce produit est déjà présent dans le panier - Modification de la quantité effectuée");   
+                        let addNewQuantity = parseInt(productAlreadyInLocalStorage.productQuantity) + parseInt(productChoice.productQuantity);
+                        productAlreadyInLocalStorage.productQuantity = addNewQuantity;
+                        localStorage.setItem("product", JSON.stringify(savingProductToLocalStorage));
+                    } else {
+                        alert("Il y a d'autres produits dans le panier - Ajout de la nouvelle selection");
+                        savingProductToLocalStorage.push(productChoice);
+                        localStorage.setItem("product", JSON.stringify(savingProductToLocalStorage));
+                    }                   
                 } else {
                     savingProductToLocalStorage = [];
                     savingProductToLocalStorage.push(productChoice);
@@ -89,7 +98,6 @@ const addProductToCart = () => {
             console.log (savingProductToLocalStorage);
         }
     })
-
 }
 
 addProductToCart();
