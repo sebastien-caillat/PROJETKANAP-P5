@@ -71,6 +71,10 @@ const addProductToCart = () => {
                 productId: productId,
                 productQuantity: quantity,
                 productColor: color,
+                productImg: product.imageUrl,
+                productImgAlt: product.altTxt,
+                productName: product.name,
+                productPrice: product.price,
             }
 
             console.log(productChoice);
