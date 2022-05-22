@@ -65,4 +65,41 @@ for(let product in productInCart) {
                 cartItemContentSettingsDelete.appendChild(deleteItem);
                 deleteItem.classList.add("deleteItem");
                 deleteItem.textContent = "Supprimer";
+   
 }
+
+// function modifyQuantity {
+
+    // let updatedPrice = productInCart[product].productPrice * newQuantity;
+
+// }
+
+const deleteProduct = () => {
+
+    let deleteButton = document.querySelectorAll(".cart__item__content__settings__delete");
+
+    for(let i=0; i < deleteButton.length; i++) {
+        deleteButton[i].addEventListener("click", (event) => {
+            event.preventDefault();
+            let idSuppression = productInCart[i].productId;
+            productInCart = productInCart.filter(element => element.productId !== idSuppression);
+            localStorage.setItem("product", JSON.stringify(productInCart));
+            alert("Produit supprimé !");
+        })
+    }
+
+}
+
+deleteProduct();
+
+
+
+
+// const getTotalCount = () => {
+//     let totalQuantity = productInCart.filter(product => product.productQuantity > 0 && product.productQuantity <= 100);
+//     console.log(totalQuantity);
+//     // document.getElementById("totalQuantity").textContent = totalQuantity.productQuantity;
+// }
+
+// getTotalCount();
+
