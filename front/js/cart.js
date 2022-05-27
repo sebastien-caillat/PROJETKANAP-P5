@@ -68,23 +68,46 @@ for(let product in productInCart) {
    
 }
 
-// function modifyQuantity {
+const modifyQuantity = () => {
 
-    // let updatedPrice = productInCart[product].productPrice * newQuantity;
+    let modifyButton = document.querySelectorAll(".itemQuantity");
 
-// }
+        for(let i = 0; i < modifyButton.length; i++) {
+
+            modifyButton[i].addEventListener("change", (event) => {
+
+                event.preventDefault();
+
+                const baseQuantity = productInCart[i].productQuantity;
+                const newQuantity = modifyButton[i].valueAsNumber;
+
+                const productToModify = productInCart.find(element => newQuantity !== baseQuantity);
+
+                productToModify.productQuantity = newQuantity;
+                productInCart[i].productQuantity = productToModify.productQuantity;
+
+                localStorage.setItem("product", JSON.stringify(productInCart));
+
+            })
+        }
+
+}
+
+modifyQuantity();
 
 const deleteProduct = () => {
 
     let deleteButton = document.querySelectorAll(".cart__item__content__settings__delete");
 
-    for(let i=0; i < deleteButton.length; i++) {
+    for(let i = 0; i < deleteButton.length; i++) {
         deleteButton[i].addEventListener("click", (event) => {
             event.preventDefault();
             let idSuppression = productInCart[i].productId;
-            productInCart = productInCart.filter(element => element.productId !== idSuppression);
+            let colorIdSuppression = productInCart[i].productColor;
+            productInCart = productInCart.filter(element => element.productId !== idSuppression || element.productColor !== colorIdSuppression);
             localStorage.setItem("product", JSON.stringify(productInCart));
             alert("Produit supprimé !");
+            location.reload();
         })
     }
 
@@ -92,7 +115,15 @@ const deleteProduct = () => {
 
 deleteProduct();
 
+// const modifyPrice = () => {
+//     for(product in productInCart) {
+//         let price = productInCart[product].productPrice * productInCart[product].productQuantity;
+//         let productPrice = document.querySelector(".cart__item__content__description\\p");
+//         productPrice[product].textContent = price;
+//     }
+// }
 
+// modifyPrice();
 
 
 // const getTotalCount = () => {
