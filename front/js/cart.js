@@ -116,7 +116,7 @@ const deleteProduct = () => {
 deleteProduct();
 
 // const modifyPrice = () => {
-//     for(product in productInCart) {
+//     if(productInCart.productQuantity > 1) {
 //         let price = productInCart[product].productPrice * productInCart[product].productQuantity;
 //         let productPrice = document.querySelector(".cart__item__content__description\\p");
 //         productPrice[product].textContent = price;
@@ -126,11 +126,30 @@ deleteProduct();
 // modifyPrice();
 
 
-// const getTotalCount = () => {
-//     let totalQuantity = productInCart.filter(product => product.productQuantity > 0 && product.productQuantity <= 100);
-//     console.log(totalQuantity);
-//     // document.getElementById("totalQuantity").textContent = totalQuantity.productQuantity;
-// }
+const getTotalCount = () => {
+    const calculatingTotalPrice = [];
+    const calculatingTotalQuantity = [];
+    for (let i = 0; i < productInCart.length; i++) {
+        let productPriceInCart = productInCart[i].productPrice;
+        calculatingTotalPrice.push(productPriceInCart);
 
-// getTotalCount();
+        const initialValue = 0;
+        const totalPrice = calculatingTotalPrice.reduce((previousValue, currentValue) => previousValue + currentValue, initialValue);
+        console.log(totalPrice);
+
+        const showPriceInCart = document.getElementById("totalPrice");
+        showPriceInCart.textContent = totalPrice;
+
+        let productQuantityInCart = parseInt(productInCart[i].productQuantity);
+        calculatingTotalQuantity.push(productQuantityInCart);
+        const totalQuantity = calculatingTotalQuantity.reduce((previousValue, currentValue) => previousValue + currentValue, initialValue);
+        console.log(totalQuantity);
+
+        const showNumberOfArticlesInCart = document.getElementById("totalQuantity");
+        showNumberOfArticlesInCart.textContent = totalQuantity;
+
+    }
+}
+
+getTotalCount();
 
