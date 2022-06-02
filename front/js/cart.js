@@ -124,7 +124,11 @@ const modifyPrice = () => {
          productPriceToModify.productPrice = multiplicatePriceByQuantity;
          productInCart[i].productPrice = productPriceToModify.productPrice;
 
-         localStorage.setItem("product", JSON.stringify(productInCart));        
+         localStorage.setItem("product", JSON.stringify(productInCart));
+         
+         if(modifyQuantity) {
+              // Essayer de stopper l'exécution du Javascript quand reload - Problème = le calcul s'exécute à nouveau quand on reload et donne un résultat erronné  
+         }
     }
 }
 
