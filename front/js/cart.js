@@ -115,15 +115,20 @@ const deleteProduct = () => {
 
 deleteProduct();
 
-// const modifyPrice = () => {
-//     if(productInCart.productQuantity > 1) {
-//         let price = productInCart[product].productPrice * productInCart[product].productQuantity;
-//         let productPrice = document.querySelector(".cart__item__content__description\\p");
-//         productPrice[product].textContent = price;
-//     }
-// }
+const modifyPrice = () => {
+    for(let i = 0; i < productInCart.length; i++) {
+         const multiplicatePriceByQuantity = parseInt(productInCart[i].productPrice) * parseInt(productInCart[i].productQuantity);
+         console.log(multiplicatePriceByQuantity);
 
-// modifyPrice();
+         const productPriceToModify = productInCart.find(element => parseInt(element.productQuantity) > 1)
+         productPriceToModify.productPrice = multiplicatePriceByQuantity;
+         productInCart[i].productPrice = productPriceToModify.productPrice;
+
+         localStorage.setItem("product", JSON.stringify(productInCart));        
+    }
+}
+
+modifyPrice();
 
 
 const getTotalCount = () => {
