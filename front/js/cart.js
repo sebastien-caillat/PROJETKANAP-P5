@@ -147,3 +147,57 @@ const getTotalCount = () => {
 }
 
 getTotalCount();
+
+const checkForm = () => {
+    let checkFirstNameInput = document.getElementById("firstName");
+    if(checkFirstNameInput.value != "") {
+        return true;
+    } else {
+        let firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
+        firstNameErrorMsg.textContent = "Enter your first name here !";
+    }
+
+    let checkLastNameInput = document.getElementById("lastName");
+    if(checkLastNameInput.value != "") {
+        return true;
+    } else {
+        let lastNameErrorMsg = document.getElementById("lastNameErrorMsg");
+        lastNameErrorMsg.textContent = "Enter your last name here !";
+    }
+
+    let checkAddressInput = document.getElementById("address");
+    if(checkAddressInput.value != "") {
+        // ajouter autre condition pour vérifier qu'une adresse est bien renseignée dans le champ
+        return true;
+    } else {
+        let addressErrorMsg = document.getElementById("addressErrorMsg");
+        addressErrorMsg.textContent = "Enter your address here !";
+    }
+
+    let checkCityInput = document.getElementById("city");
+    if(checkCityInput.value != "") {
+        // ajouter une autre condition ?
+        return true;
+    } else {        
+        let cityErrorMsg = document.getElementById("cityErrorMsg");
+        cityErrorMsg.textContent = "Enter your city name here !";
+    }
+
+    let checkEmailInput = document.getElementById("email");
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(checkEmailInput.value)) {
+        return true;
+    } else {
+        let emailErrorMsg = document.getElementById("emailErrorMsg");
+        emailErrorMsg.textContent = "Enter a valid email address here !";
+    }
+}
+
+const validateForm = () => {
+
+    let submitOrderButton = document.getElementById("order");
+
+    submitOrderButton.addEventListener("onclick", (event) => {
+        preventDefault();
+        checkForm();
+    })
+}
