@@ -148,56 +148,76 @@ const getTotalCount = () => {
 
 getTotalCount();
 
-const checkForm = () => {
-    let checkFirstNameInput = document.getElementById("firstName");
-    if(checkFirstNameInput.value != "") {
-        return true;
-    } else {
-        let firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
-        firstNameErrorMsg.textContent = "Enter your first name here !";
-    }
 
-    let checkLastNameInput = document.getElementById("lastName");
-    if(checkLastNameInput.value != "") {
-        return true;
-    } else {
-        let lastNameErrorMsg = document.getElementById("lastNameErrorMsg");
-        lastNameErrorMsg.textContent = "Enter your last name here !";
-    }
+let orderForm = document.querySelector(".cart__order__form");
 
-    let checkAddressInput = document.getElementById("address");
-    if(checkAddressInput.value != "") {
-        // ajouter autre condition pour vérifier qu'une adresse est bien renseignée dans le champ
-        return true;
-    } else {
-        let addressErrorMsg = document.getElementById("addressErrorMsg");
-        addressErrorMsg.textContent = "Enter your address here !";
-    }
+    orderForm.email.addEventListener("change", function() {
+        validEmail(this);
+    });
 
-    let checkCityInput = document.getElementById("city");
-    if(checkCityInput.value != "") {
-        // ajouter une autre condition ?
-        return true;
-    } else {        
-        let cityErrorMsg = document.getElementById("cityErrorMsg");
-        cityErrorMsg.textContent = "Enter your city name here !";
-    }
+const validEmail = function(inputEmail) {
+    let emailRegExp = new RegExp("^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$","g");
+    let testEmail = emailRegExp.test(inputEmail.value);
+    let emailErrorMsg = document.getElementById("emailErrorMsg");
 
-    let checkEmailInput = document.getElementById("email");
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(checkEmailInput.value)) {
-        return true;
-    } else {
-        let emailErrorMsg = document.getElementById("emailErrorMsg");
+    console.log(testEmail);
+
+    if(testEmail == false) {
         emailErrorMsg.textContent = "Enter a valid email address here !";
     }
-}
+};
 
-const validateForm = () => {
+// const checkForm = () => {
+//     let checkFirstNameInput = document.getElementById("firstName");
+//     if(checkFirstNameInput.value != "") {
+//         return true;
+//     } else {
+//         let firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
+//         firstNameErrorMsg.textContent = "Enter your first name here !";
+//     }
 
-    let submitOrderButton = document.getElementById("order");
+//     let checkLastNameInput = document.getElementById("lastName");
+//     if(checkLastNameInput.value != "") {
+//         return true;
+//     } else {
+//         let lastNameErrorMsg = document.getElementById("lastNameErrorMsg");
+//         lastNameErrorMsg.textContent = "Enter your last name here !";
+//     }
 
-    submitOrderButton.addEventListener("onclick", (event) => {
-        preventDefault();
-        checkForm();
-    })
-}
+//     let checkAddressInput = document.getElementById("address");
+//     if(checkAddressInput.value != "") {
+//         // ajouter autre condition pour vérifier qu'une adresse est bien renseignée dans le champ
+//         return true;
+//     } else {
+//         let addressErrorMsg = document.getElementById("addressErrorMsg");
+//         addressErrorMsg.textContent = "Enter your address here !";
+//     }
+
+//     let checkCityInput = document.getElementById("city");
+//     if(checkCityInput.value != "") {
+//         // ajouter une autre condition ?
+//         return true;
+//     } else {        
+//         let cityErrorMsg = document.getElementById("cityErrorMsg");
+//         cityErrorMsg.textContent = "Enter your city name here !";
+//     }
+
+//     let checkEmailInput = document.getElementById("email");
+//     // let regExpEmail = 
+//     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(checkEmailInput.value)) {
+//         return true;
+//     } else {
+//         let emailErrorMsg = document.getElementById("emailErrorMsg");
+//         emailErrorMsg.textContent = "Enter a valid email address here !";
+//     }
+// }
+
+// const validateForm = () => {
+
+//     let submitOrderButton = document.getElementById("order");
+
+//     submitOrderButton.addEventListener("onclick", (event) => {
+//         preventDefault();
+//         checkForm();
+//     })
+// }
