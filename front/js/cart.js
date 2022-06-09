@@ -151,21 +151,74 @@ getTotalCount();
 
 let orderForm = document.querySelector(".cart__order__form");
 
+    orderForm.firstName.addEventListener("change", function() {
+        validBasicInput(this);
+    })
+
+    orderForm.lastName.addEventListener("change", function() {
+        validBasicInput(this);
+    })
+
+    orderForm.address.addEventListener("change", function() {
+        validAddress(this);
+    });
+
+    orderForm.city.addEventListener("change", function() {
+        validBasicInput(this);
+    })
+
     orderForm.email.addEventListener("change", function() {
         validEmail(this);
     });
 
+const validAddress = function(inputAddress) {
+    let addressRegExp = new RegExp("^[A-Za-z0-9]{5,100}$","g");
+    let testAddress = addressRegExp.test(inputAddress.value);
+
+    let addressErrorMsg = document.getElementById("addressErrorMsg");
+    
+    console.log(testAddress);
+    
+    if(testAddress == false) {
+        // ajouter du code pour effacer le message d'erreur quand la valeur devient correcte
+        addressErrorMsg.textContent = "Enter your address here !";
+    }
+}
+
+// REVOIR LA CONSTANTE validBasicInput pour la faire fonctionner (split en 3 fonctions si pas possible)
+
+const validBasicInput = function(basicInput) {
+    let basicInputRegExp = newRegExp("^[A-Z][A-Za-z\é\è\ê\-]+$", "g");
+    let testBasicInput = basicInputRegExp.test(basicInput.value);
+
+    let firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
+    let lastNameErrorMsg = document.getElementById("lastNameErrorMsg");
+    let cityErrorMsg = document.getElementById("cityErrorMsg");
+
+    console.log(testBasicInput);
+
+    if(testBasicInput == false && orderForm.firstName) {
+        firstNameErrorMsg.textContent = "Enter your first name here !";
+    } else if(testBasicInput == false && orderForm.lastName) {
+        lastNameErrorMsg.textContent = "Enter your last name here !";
+    } else if(testBasicInput == false && orderForm.city) {
+        cityErrorMsg.textContent = "Enter your city name here !";
+    }
+}
+
 const validEmail = function(inputEmail) {
     let emailRegExp = new RegExp("^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$","g");
     let testEmail = emailRegExp.test(inputEmail.value);
+
     let emailErrorMsg = document.getElementById("emailErrorMsg");
 
     console.log(testEmail);
 
     if(testEmail == false) {
+        // ajouter du code pour effacer le message d'erreur quand la valeur devient correcte
         emailErrorMsg.textContent = "Enter a valid email address here !";
     }
-};
+}
 
 // const checkForm = () => {
 //     let checkFirstNameInput = document.getElementById("firstName");
