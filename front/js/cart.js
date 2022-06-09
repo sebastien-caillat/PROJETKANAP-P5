@@ -150,13 +150,14 @@ getTotalCount();
 
 
 let orderForm = document.querySelector(".cart__order__form");
+let basicInputRegExp = new RegExp("^[a-zA-Z ,.'-]+$");
 
     orderForm.firstName.addEventListener("change", function() {
-        validBasicInput(this);
+        validFirstName(this);
     })
 
     orderForm.lastName.addEventListener("change", function() {
-        validBasicInput(this);
+        validLastName(this);
     })
 
     orderForm.address.addEventListener("change", function() {
@@ -164,15 +165,40 @@ let orderForm = document.querySelector(".cart__order__form");
     });
 
     orderForm.city.addEventListener("change", function() {
-        validBasicInput(this);
+        validCity(this);
     })
 
     orderForm.email.addEventListener("change", function() {
         validEmail(this);
     });
 
+const validFirstName = function(inputFirstName) {
+    let testFirstName = basicInputRegExp.test(inputFirstName.value);
+
+    let firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
+
+    console.log(testFirstName);
+
+    if(testFirstName == false) {
+        // ajouter du code pour effacer le message d'erreur quand la valeur devient correcte
+        firstNameErrorMsg.textContent = "Enter your first name here !";
+    }
+}
+
+const validLastName = function(inputLastName) {
+    let testLastName = basicInputRegExp.test(inputLastName.value);
+
+    let lastNameErrorMsg = document.getElementById("lastNameErrorMsg");
+
+    console.log(testLastName);
+
+    if(testLastName == false) {
+        // ajouter du code pour effacer le message d'erreur quand la valeur devient correcte
+        lastNameErrorMsg.textContent = "Enter your last name here!";
+    }
+}
 const validAddress = function(inputAddress) {
-    let addressRegExp = new RegExp("^[A-Za-z0-9]{5,100}$","g");
+    let addressRegExp = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
     let testAddress = addressRegExp.test(inputAddress.value);
 
     let addressErrorMsg = document.getElementById("addressErrorMsg");
@@ -185,24 +211,16 @@ const validAddress = function(inputAddress) {
     }
 }
 
-// REVOIR LA CONSTANTE validBasicInput pour la faire fonctionner (split en 3 fonctions si pas possible)
+const validCity = function(inputCity) {
+    let testCity = basicInputRegExp.test(inputCity.value);
 
-const validBasicInput = function(basicInput) {
-    let basicInputRegExp = newRegExp("^[A-Z][A-Za-z\é\è\ê\-]+$", "g");
-    let testBasicInput = basicInputRegExp.test(basicInput.value);
-
-    let firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
-    let lastNameErrorMsg = document.getElementById("lastNameErrorMsg");
     let cityErrorMsg = document.getElementById("cityErrorMsg");
 
-    console.log(testBasicInput);
+    console.log(testCity);
 
-    if(testBasicInput == false && orderForm.firstName) {
-        firstNameErrorMsg.textContent = "Enter your first name here !";
-    } else if(testBasicInput == false && orderForm.lastName) {
-        lastNameErrorMsg.textContent = "Enter your last name here !";
-    } else if(testBasicInput == false && orderForm.city) {
-        cityErrorMsg.textContent = "Enter your city name here !";
+    if(testCity == false) {
+        // ajouter du code pour effacer le message d'erreur quand la valeur devient correcte
+        cityErrorMsg.textContent = "Enter your city name here!";
     }
 }
 
