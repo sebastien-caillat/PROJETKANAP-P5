@@ -180,8 +180,9 @@ const validFirstName = function(inputFirstName) {
     console.log(testFirstName);
 
     if(testFirstName == false) {
-        // ajouter du code pour effacer le message d'erreur quand la valeur devient correcte
         firstNameErrorMsg.textContent = "Enter your first name here !";
+    } else {
+        firstNameErrorMsg.textContent = "";
     }
 }
 
@@ -193,8 +194,9 @@ const validLastName = function(inputLastName) {
     console.log(testLastName);
 
     if(testLastName == false) {
-        // ajouter du code pour effacer le message d'erreur quand la valeur devient correcte
         lastNameErrorMsg.textContent = "Enter your last name here!";
+    } else {
+        lastNameErrorMsg.textContent = "";
     }
 }
 const validAddress = function(inputAddress) {
@@ -206,8 +208,9 @@ const validAddress = function(inputAddress) {
     console.log(testAddress);
     
     if(testAddress == false) {
-        // ajouter du code pour effacer le message d'erreur quand la valeur devient correcte
         addressErrorMsg.textContent = "Enter your address here !";
+    } else {
+        addressErrorMsg.textContent = "";
     }
 }
 
@@ -219,8 +222,9 @@ const validCity = function(inputCity) {
     console.log(testCity);
 
     if(testCity == false) {
-        // ajouter du code pour effacer le message d'erreur quand la valeur devient correcte
         cityErrorMsg.textContent = "Enter your city name here!";
+    } else {
+        cityErrorMsg.textContent = "";
     }
 }
 
@@ -233,55 +237,11 @@ const validEmail = function(inputEmail) {
     console.log(testEmail);
 
     if(testEmail == false) {
-        // ajouter du code pour effacer le message d'erreur quand la valeur devient correcte
         emailErrorMsg.textContent = "Enter a valid email address here !";
+    } else {
+        emailErrorMsg.textContent = "";
     }
 }
-
-// const checkForm = () => {
-//     let checkFirstNameInput = document.getElementById("firstName");
-//     if(checkFirstNameInput.value != "") {
-//         return true;
-//     } else {
-//         let firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
-//         firstNameErrorMsg.textContent = "Enter your first name here !";
-//     }
-
-//     let checkLastNameInput = document.getElementById("lastName");
-//     if(checkLastNameInput.value != "") {
-//         return true;
-//     } else {
-//         let lastNameErrorMsg = document.getElementById("lastNameErrorMsg");
-//         lastNameErrorMsg.textContent = "Enter your last name here !";
-//     }
-
-//     let checkAddressInput = document.getElementById("address");
-//     if(checkAddressInput.value != "") {
-//         // ajouter autre condition pour vérifier qu'une adresse est bien renseignée dans le champ
-//         return true;
-//     } else {
-//         let addressErrorMsg = document.getElementById("addressErrorMsg");
-//         addressErrorMsg.textContent = "Enter your address here !";
-//     }
-
-//     let checkCityInput = document.getElementById("city");
-//     if(checkCityInput.value != "") {
-//         // ajouter une autre condition ?
-//         return true;
-//     } else {        
-//         let cityErrorMsg = document.getElementById("cityErrorMsg");
-//         cityErrorMsg.textContent = "Enter your city name here !";
-//     }
-
-//     let checkEmailInput = document.getElementById("email");
-//     // let regExpEmail = 
-//     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(checkEmailInput.value)) {
-//         return true;
-//     } else {
-//         let emailErrorMsg = document.getElementById("emailErrorMsg");
-//         emailErrorMsg.textContent = "Enter a valid email address here !";
-//     }
-// }
 
 // const validateForm = () => {
 
