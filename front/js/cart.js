@@ -150,7 +150,7 @@ getTotalCount();
 
 
 let orderForm = document.querySelector(".cart__order__form");
-let basicInputRegExp = new RegExp("^[a-zA-Z ,.'-]+$");
+let basicInputRegExp = new RegExp("^[a-zA-Z ,.'-]+$"); // Modifier la RegExp pour accepter les caractères spéciaux (accents)
 
     orderForm.firstName.addEventListener("change", function() {
         validFirstName(this);
@@ -243,12 +243,39 @@ const validEmail = function(inputEmail) {
     }
 }
 
-// const validateForm = () => {
+const validateForm = () => {
 
-//     let submitOrderButton = document.getElementById("order");
+    let submitOrderButton = document.getElementById("order");
 
-//     submitOrderButton.addEventListener("onclick", (event) => {
-//         preventDefault();
-//         checkForm();
-//     })
-// }
+    submitOrderButton.addEventListener("click", (event) => {
+
+        preventDefault();
+
+        if(validFirstName() == true && validLastName() == true && validAddress() == true && validCity() == true && validEmail() == true) {
+
+            const formData = {
+                firstName: orderForm.firstName.value,
+                lastName: orderForm.lastName.value,
+                address: orderForm.address.value,
+                city: orderForm.city.value,
+                email: orderForm.email.value,
+            } 
+
+            console.log(formData);
+
+            let savingFormDataToLocalStorage = JSON.parse(localStorage.getItem("orderData"));
+            savingFormDataToLocalStorage = [];
+            savingFormDataToLocalStorage.push(formData);
+            localStorage.setItem("orderData", JSON.stringify(savingFormDataToLocalStorage));
+
+            console.log(savingFormDataToLocalStorage);
+
+        } else {
+
+            alert("Une ou plusieurs données renseignées sont incorrectes. Veuillez renseigner des données valides");
+
+        }
+    })
+}
+
+validateForm();
