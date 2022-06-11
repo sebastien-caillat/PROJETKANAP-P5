@@ -148,134 +148,142 @@ const getTotalCount = () => {
 
 getTotalCount();
 
+const getFormData = () => {
 
-let orderForm = document.querySelector(".cart__order__form");
-let basicInputRegExp = new RegExp("^[a-zA-Z ,.'-]+$"); // Modifier la RegExp pour accepter les caractères spéciaux (accents)
+    let orderForm = document.querySelector(".cart__order__form");
+    let basicInputRegExp = new RegExp("^[a-zA-Z ,.'-]+$"); // Modifier la RegExp pour accepter les caractères spéciaux (accents)
 
-    orderForm.firstName.addEventListener("change", function() {
-        validFirstName(this);
-    })
+        orderForm.firstName.addEventListener("change", function() {
+            validFirstName(this);
+        });
 
-    orderForm.lastName.addEventListener("change", function() {
-        validLastName(this);
-    })
+        orderForm.lastName.addEventListener("change", function() {
+            validLastName(this);
+        });
 
-    orderForm.address.addEventListener("change", function() {
-        validAddress(this);
-    });
+        orderForm.address.addEventListener("change", function() {
+            validAddress(this);
+        });
 
-    orderForm.city.addEventListener("change", function() {
-        validCity(this);
-    })
+        orderForm.city.addEventListener("change", function() {
+            validCity(this);
+        });
 
-    orderForm.email.addEventListener("change", function() {
-        validEmail(this);
-    });
+        orderForm.email.addEventListener("change", function() {
+            validEmail(this);
+        });
 
-const validFirstName = function(inputFirstName) {
-    let testFirstName = basicInputRegExp.test(inputFirstName.value);
+    const validFirstName = function(inputFirstName) {
 
-    let firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
+        let testFirstName = basicInputRegExp.test(inputFirstName.value);
 
-    console.log(testFirstName);
+        let firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
 
-    if(testFirstName == false) {
-        firstNameErrorMsg.textContent = "Enter your first name here !";
-    } else {
-        firstNameErrorMsg.textContent = "";
+        console.log(testFirstName);
+
+        if(testFirstName == false) {
+            firstNameErrorMsg.textContent = "Enter your first name here !";
+        } else {
+            firstNameErrorMsg.textContent = "";
+        }
     }
+
+    const validLastName = function(inputLastName) {
+        let testLastName = basicInputRegExp.test(inputLastName.value);
+
+        let lastNameErrorMsg = document.getElementById("lastNameErrorMsg");
+
+        console.log(testLastName);
+
+        if(testLastName == false) {
+            lastNameErrorMsg.textContent = "Enter your last name here!";
+        } else {
+            lastNameErrorMsg.textContent = "";
+        }
+    }
+
+    const validAddress = function(inputAddress) {
+        let addressRegExp = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
+        let testAddress = addressRegExp.test(inputAddress.value);
+
+        let addressErrorMsg = document.getElementById("addressErrorMsg");
+        
+        console.log(testAddress);
+        
+        if(testAddress == false) {
+            addressErrorMsg.textContent = "Enter your address here !";
+        } else {
+            addressErrorMsg.textContent = "";
+        }
+    }
+
+    const validCity = function(inputCity) {
+        let testCity = basicInputRegExp.test(inputCity.value);
+
+        let cityErrorMsg = document.getElementById("cityErrorMsg");
+
+        console.log(testCity);
+
+        if(testCity == false) {
+            cityErrorMsg.textContent = "Enter your city name here!";
+        } else {
+            cityErrorMsg.textContent = "";
+        }
+    }
+
+    const validEmail = function(inputEmail) {
+        let emailRegExp = new RegExp("^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$","g");
+        let testEmail = emailRegExp.test(inputEmail.value);
+
+        let emailErrorMsg = document.getElementById("emailErrorMsg");
+
+        console.log(testEmail);
+
+        if(testEmail == false) {
+            emailErrorMsg.textContent = "Enter a valid email address here !";
+        } else {
+            emailErrorMsg.textContent = "";
+            return true;
+        }
+    }
+
 }
 
-const validLastName = function(inputLastName) {
-    let testLastName = basicInputRegExp.test(inputLastName.value);
+getFormData();
 
-    let lastNameErrorMsg = document.getElementById("lastNameErrorMsg");
-
-    console.log(testLastName);
-
-    if(testLastName == false) {
-        lastNameErrorMsg.textContent = "Enter your last name here!";
-    } else {
-        lastNameErrorMsg.textContent = "";
-    }
-}
-const validAddress = function(inputAddress) {
-    let addressRegExp = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
-    let testAddress = addressRegExp.test(inputAddress.value);
-
-    let addressErrorMsg = document.getElementById("addressErrorMsg");
-    
-    console.log(testAddress);
-    
-    if(testAddress == false) {
-        addressErrorMsg.textContent = "Enter your address here !";
-    } else {
-        addressErrorMsg.textContent = "";
-    }
-}
-
-const validCity = function(inputCity) {
-    let testCity = basicInputRegExp.test(inputCity.value);
-
-    let cityErrorMsg = document.getElementById("cityErrorMsg");
-
-    console.log(testCity);
-
-    if(testCity == false) {
-        cityErrorMsg.textContent = "Enter your city name here!";
-    } else {
-        cityErrorMsg.textContent = "";
-    }
-}
-
-const validEmail = function(inputEmail) {
-    let emailRegExp = new RegExp("^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$","g");
-    let testEmail = emailRegExp.test(inputEmail.value);
-
-    let emailErrorMsg = document.getElementById("emailErrorMsg");
-
-    console.log(testEmail);
-
-    if(testEmail == false) {
-        emailErrorMsg.textContent = "Enter a valid email address here !";
-    } else {
-        emailErrorMsg.textContent = "";
-    }
-}
-
-const validateForm = () => {
+const sendOrder = () => {
 
     let submitOrderButton = document.getElementById("order");
 
     submitOrderButton.addEventListener("click", (event) => {
 
-        preventDefault();
+        event.preventDefault();
 
-        if(validFirstName() == true && validLastName() == true && validAddress() == true && validCity() == true && validEmail() == true) {
+        // if(ALL INPUT = TRUE) {
 
-            const formData = {
-                firstName: orderForm.firstName.value,
-                lastName: orderForm.lastName.value,
-                address: orderForm.address.value,
-                city: orderForm.city.value,
-                email: orderForm.email.value,
-            } 
-
-            console.log(formData);
-
-            let savingFormDataToLocalStorage = JSON.parse(localStorage.getItem("orderData"));
-            savingFormDataToLocalStorage = [];
-            savingFormDataToLocalStorage.push(formData);
-            localStorage.setItem("orderData", JSON.stringify(savingFormDataToLocalStorage));
-
-            console.log(savingFormDataToLocalStorage);
-
-        } else {
-
-            alert("Une ou plusieurs données renseignées sont incorrectes. Veuillez renseigner des données valides");
-
+        const contact = {
+            firstName : document.getElementById("firstName").value,
+            lastName : document.getElementById("lastName").value,
+            address : document.getElementById("address").value,
+            city : document.getElementById("city").value,
+            email : document.getElementById("email").value
         }
+
+        localStorage.setItem("contact", JSON.stringify(contact));
+
+        const sendDataToServer = {
+            productInCart,
+            contact
+        }
+
+        console.log(sendDataToServer);
+
+//      } else {
+
+//         alert("Une ou plusieurs données renseignées sont incorrectes. Veuillez renseigner des données valides");
+
+//      }
     })
 }
 
-validateForm();
+sendOrder();
