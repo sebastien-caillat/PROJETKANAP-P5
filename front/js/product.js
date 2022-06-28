@@ -62,7 +62,7 @@ const addProductToCart = () => {
 
     addToCartButton.addEventListener("click", (event) => {
 
-        if(quantityChoice.value > 0 && quantityChoice.value <= 100) {
+        if(quantityChoice.value > 0 && quantityChoice.value <= 100 && colorChoice.value !== null && colorChoice.value !== "") {
 
             const quantity = quantityChoice.value;
             const color = colorChoice.value;
@@ -100,6 +100,8 @@ const addProductToCart = () => {
                 }
 
             console.log (savingProductToLocalStorage);
+        } else {
+            alert("Le produit n'a pas pu être ajouté au panier");
         }
     })
 }

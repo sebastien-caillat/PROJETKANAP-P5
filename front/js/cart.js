@@ -271,12 +271,45 @@ const sendOrder = () => {
 
         localStorage.setItem("contact", JSON.stringify(contact));
 
-        const sendDataToServer = {
-            productInCart,
-            contact
+        let productsId = [];
+
+        for(let i = 0; i < productInCart.length; i++) {
+            productsId.push(productInCart[i].productId);
         }
 
-        console.log(sendDataToServer);
+        const order = {
+            contact,
+            productsId
+        }
+
+        console.log("order");
+        console.log(order);
+
+        const options = {
+            method: "POST",
+            body: JSON.stringify(order),
+            headers: {
+                "Accept" : "application/json",
+                "Content-Type" : "application/json"
+            }
+        }
+
+        console.log("options");
+        console.log(options);
+
+        fetch("http://localhost:3000/api/products/order", options)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("data");
+                console.log(data);
+                // localStorage.clear();
+                // localStorage.setItem("orderId", data.orderId);
+
+                // document.location.href = "confirmation.html";
+            })
+            .catch((err) => {
+                alert("Impossible d'accéder à la commande désirée");
+            })
 
 //      } else {
 

@@ -1,4 +1,6 @@
 
+// Récupération des données de l'API et création des fiches produits
+
 fetch("http://localhost:3000/api/products")
     .then(function(response) {
         if (response.ok) {
