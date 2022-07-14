@@ -7,6 +7,8 @@ let product = "";
 const colorChoice = document.getElementById("colors");
 const quantityChoice = document.getElementById("quantity");
 
+// Récupération de l'ID du produit choisi et création de la fiche produit
+
 const getProductChoice = () => {
 
     fetch(`http://localhost:3000/api/products/${productId}`)
@@ -54,6 +56,8 @@ const createProductChoice = (product) => {
     }
 
 }
+
+// Fonction d'ajout du produit dans le localStorage 
 
 const addProductToCart = () => {
 

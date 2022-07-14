@@ -1,5 +1,7 @@
 let productInCart = JSON.parse(localStorage.getItem("product"));
 
+// Création de cartes produits en fonction du contenu du localStorage 
+
 const getProductCard = () => {
     for(let product in productInCart) {
         let cartItem = document.createElement("article");
@@ -72,6 +74,8 @@ const getProductCard = () => {
 
 getProductCard();
 
+// Fonction permettant de modifier la quantité d'un produit
+
 const modifyQuantity = () => {
 
     let modifyButton = document.querySelectorAll(".itemQuantity");
@@ -100,6 +104,9 @@ const modifyQuantity = () => {
 
 modifyQuantity();
 
+
+// Fonction permettant de supprimer un produit
+
 const deleteProduct = () => {
 
     let deleteButton = document.querySelectorAll(".cart__item__content__settings__delete");
@@ -120,12 +127,17 @@ const deleteProduct = () => {
 
 deleteProduct();
 
+
+// Calcul du prix total du panier
+
 const getTotalCount = () => {
 
     let productQuantity = document.getElementsByClassName("itemQuantity");
     let quantityOfProducts = productQuantity.length;
 
     totalProductQuantity = 0;
+
+// Calcul du nombre total de produit dans le panier
 
     for (i = 0; i < quantityOfProducts; ++i) {
         totalProductQuantity += productQuantity[i].valueAsNumber;
@@ -137,6 +149,8 @@ const getTotalCount = () => {
 
     totalPrice = 0;
 
+// Calcul du prix total du panier
+
     for (let i = 0; i < productQuantity.length; ++i) {
         totalPrice += (productQuantity[i].valueAsNumber * productInCart[i].productPrice);
     }
@@ -147,6 +161,9 @@ const getTotalCount = () => {
 }
 
 getTotalCount();
+
+
+// Validation des données du formulaire de commande
 
 const getFormData = () => {
 
@@ -173,6 +190,8 @@ const getFormData = () => {
             validEmail(this);
         });
 
+// Fonction de validation du prénom
+
     const validFirstName = function(inputFirstName) {
 
         let testFirstName = basicInputRegExp.test(inputFirstName.value);
@@ -188,6 +207,8 @@ const getFormData = () => {
         }
     }
 
+// Fonction de validation du nom de famille
+
     const validLastName = function(inputLastName) {
         let testLastName = basicInputRegExp.test(inputLastName.value);
 
@@ -201,6 +222,8 @@ const getFormData = () => {
             lastNameErrorMsg.textContent = "";
         }
     }
+
+// Fonction de validation de l'adresse
 
     const validAddress = function(inputAddress) {
         let addressRegExp = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
@@ -217,6 +240,8 @@ const getFormData = () => {
         }
     }
 
+// Fonction de validation de la ville
+
     const validCity = function(inputCity) {
         let testCity = basicInputRegExp.test(inputCity.value);
 
@@ -230,6 +255,8 @@ const getFormData = () => {
             cityErrorMsg.textContent = "";
         }
     }
+
+// Fonction de validation de l'email
 
     const validEmail = function(inputEmail) {
         let emailRegExp = new RegExp("^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$","g");
@@ -250,6 +277,9 @@ const getFormData = () => {
 }
 
 getFormData();
+
+
+// Confirmation de la commande
 
 const sendOrder = () => {
 
@@ -306,6 +336,8 @@ const sendOrder = () => {
                 // localStorage.setItem("orderId", data.orderId);
 
                 // document.location.href = "confirmation.html";
+
+                // Utiliser un searchParams plutôt que cette méthode ?
             })
             .catch((err) => {
                 alert("Impossible d'accéder à la commande désirée");
